@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // Replace with actual tool names from Jenkins configuration
-        jdk 'JDK'
+        maven 'Maven'  // Make sure 'Maven' is configured in Jenkins Global Tools
+        jdk 'JDK'      // Make sure 'JDK' is configured in Jenkins Global Tools
     }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Clone from GitHub master branch
+                git branch: 'master', url: 'https://github.com/ShashiMadari/MymavenSelenum.git'
             }
         }
 
@@ -25,19 +26,20 @@ pipeline {
             }
         }
 
-        stage('Archive Artifacts') {
+        stage('Run Application') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                // Runs the main method in com.example.App
+                sh 'mvn exec:java -Dexec.mainClass="com.example.App"'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo '🎉 Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo '❌ Pipeline failed!'
         }
     }
 }
