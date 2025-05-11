@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class App {
     public static void main(String[] args) {
         // Set path to ChromeDriver
-        System.setProperty("webdriver.chrome.driver", "/home/shruthi/Desktop/hromedriver-linux64/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/shruthi/Desktop/hromedriver-linux64");
 
         // Initialize WebDriver
         WebDriver driver = new ChromeDriver();
